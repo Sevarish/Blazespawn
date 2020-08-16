@@ -60,7 +60,7 @@ public class HealthSystem : MonoBehaviour
     }
 
     //Is called from other scripts that intend to deal damage to the script's holder.
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, string typeDmg = "Normal")
     {
         health -= damage;
         healthBar.value = CalculatePercentageHealth();

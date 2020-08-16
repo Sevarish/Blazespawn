@@ -24,7 +24,11 @@ public class AbilitiesList : MonoBehaviour
                                 
                                 BloodsurgePtcl,
                                     
-                                ShockthriveParticle;
+                                ShockthriveParticle,
+                            
+                                AcidicRushPtcl,
+                                
+                                IncineratePtcl;
 
     Camera cam;
     PlayerSoundManager soundManager;
@@ -51,16 +55,22 @@ public class AbilitiesList : MonoBehaviour
 
           FreezeblowTimer = 0.6f,
           FreezeblowCooldown = 0.6f,
-          
+
           RecoveryTimer = 1,
           RecoveryCooldown = 1,
-        
+
           BloodsurgeTimer = 1.5f,
           BloodsurgeCooldown = 0.8f,
           amountOfBloodSurgePtcl = 10,
-        
+
           ShockthriveTimer = 8,
-          ShockthriveCooldown = 8;
+          ShockthriveCooldown = 8,
+
+          AcidicRushTimer = 12,
+          AcidicRushCooldown = 12,
+        
+          IncinerateTimer = 15,
+          IncinerateCooldown = 15; 
 
     TargetSystem TgSystem;
 
@@ -135,6 +145,8 @@ public class AbilitiesList : MonoBehaviour
         {
             rotationList2[0]();
             rotationList2[1]();
+            rotationList2[2]();
+            rotationList2[3]();
         }
         if (CurrentRotation == 3)
         {
@@ -240,6 +252,19 @@ public class AbilitiesList : MonoBehaviour
         }
     }
 
+    public void Incinerate()
+    {
+        IncinerateTimer += Time.deltaTime;
+        if (Input.GetAxis("Controller Button Circle") != 0 && IncinerateTimer > IncinerateCooldown)
+        {
+            TgSystem.GetTarget().AddComponent<DotFire>();
+            TgSystem.GetTarget().GetComponent<DotFire>().InitiatalSetup(2, 3, 0.2f); //DURATION | DAMAGE PER INTERVAL | INTERVAL
+            var obj = Instantiate(IncineratePtcl, TgSystem.GetTarget().transform.position, Quaternion.identity);
+            Destroy(obj, 0.8f);
+            IncinerateTimer = 0;
+        }
+    }
+
     //ICE TYPE-----------------------------------------------
 
     public void Freezeblow()
@@ -294,7 +319,7 @@ public class AbilitiesList : MonoBehaviour
         }
     }
 
-    //PSYCHIC TYPE
+    //PSYCHIC TYPE------------------------------------------------
 
     public void Shockthrive()
     {
@@ -306,6 +331,21 @@ public class AbilitiesList : MonoBehaviour
             obj.GetComponent<ShockthriveBehaviour>().damage = 20;
             Destroy(obj, 0.5f);
             ShockthriveTimer = 0;
+        }
+    }
+
+    //POISON TYPE-----------------------------------------------------
+
+    public void AcidicRush()
+    {
+        AcidicRushTimer += Time.deltaTime;
+        if (Input.GetAxis("Controller Button Triangle") != 0 && AcidicRushTimer > AcidicRushCooldown)
+        {
+            TgSystem.GetTarget().AddComponent<DotPoison>();
+            TgSystem.GetTarget().GetComponent<DotPoison>().InitiatalSetup(5, 6, 0.5f); //DURATION | DAMAGE PER INTERVAL | INTERVAL
+            var obj = Instantiate(AcidicRushPtcl, TgSystem.GetTarget().transform.position, Quaternion.identity);
+            Destroy(obj, 0.8f);
+            AcidicRushTimer = 0;
         }
     }
 }

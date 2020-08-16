@@ -19,8 +19,11 @@ public class PlayerAbilities : MonoBehaviour
 
         Rotation2.Add(abilityRef.Freezeblow);
         Rotation2.Add(abilityRef.Shockthrive);
+        Rotation2.Add(abilityRef.AcidicRush);
+        Rotation2.Add(abilityRef.Incinerate);
 
         Rotation3.Add(abilityRef.Bloodsurge);
+
         abilityRef.SetAbilityList(Rotation1, Rotation2, Rotation3);
     }
 

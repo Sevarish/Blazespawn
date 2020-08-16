@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class TargetSystem : MonoBehaviour
 {
-    float maxDistance = 40;
-    GameObject currentTarget;
+    float maxDistance = 40, targetLockTimer;
+    GameObject currentTarget, previousTarget;
     LayerMask layerMask = 1 << 11;
     [SerializeField] Image Targetting;
     Image tg;
@@ -30,20 +30,22 @@ public class TargetSystem : MonoBehaviour
         {
             if (hit.transform.tag == "Enemy")
             {
+
                 if (tg == null)
                 {
                     currentTarget = hit.transform.gameObject;
                     tg = Instantiate(Targetting, cam.WorldToScreenPoint(currentTarget.transform.position), Quaternion.identity);
                     tg.transform.SetParent(GameObject.Find("Canvas").transform);
                 }
+                previousTarget = currentTarget;
             }
             else
             {
-                currentTarget = null;
-                if (tg != null)
-                {
-                    Destroy(tg.gameObject);
-                }
+                 currentTarget = null;
+                 if (tg != null)
+                 {
+                     Destroy(tg.gameObject);
+                 }
             }
         }
         else
@@ -53,6 +55,7 @@ public class TargetSystem : MonoBehaviour
             {
                 Destroy(tg);
             }
+            targetLockTimer = 0;
         }
         if (tg != null && currentTarget != null)
         {
