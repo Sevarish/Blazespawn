@@ -17,7 +17,7 @@ public class TargetSystem : MonoBehaviour
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 
-    void FixedUpdate()
+    void Update()
     {
         //RaycastHit hit;
         //if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))

@@ -22,7 +22,7 @@ public class BasicFireCollision : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<HealthSystem>().TakeDamage(damage);
+            collision.gameObject.GetComponent<HealthSystem>().TakeDamage(damage, "Fire");
             Destroy(this.gameObject);
         }
 

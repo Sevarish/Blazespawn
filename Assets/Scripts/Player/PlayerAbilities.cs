@@ -4,32 +4,14 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
-
-    private List<System.Action> Rotation1 = new List<System.Action>(),
-                                Rotation2 = new List<System.Action>(),
-                                Rotation3 = new List<System.Action>();
-    private AbilitiesList abilityRef; 
+    public delegate void Ability(string Input);
+    public List<Ability> Rotation1 = new List<Ability>(),
+                         Rotation2 = new List<Ability>(),
+                         Rotation3 = new List<Ability>();
+    private AbilitiesList abilityRef;
+    private string[] inputList = {};
     void Start()
     {
         abilityRef = GetComponent<AbilitiesList>();
-        Rotation1.Add(abilityRef.Firestream);
-        Rotation1.Add(abilityRef.BlazeBurst);
-        Rotation1.Add(abilityRef.StargazeBomb);
-        Rotation1.Add(abilityRef.Recovery);
-
-        Rotation2.Add(abilityRef.Freezeblow);
-        Rotation2.Add(abilityRef.Shockthrive);
-        Rotation2.Add(abilityRef.AcidicRush);
-        Rotation2.Add(abilityRef.Incinerate);
-
-        Rotation3.Add(abilityRef.Bloodsurge);
-
-        abilityRef.SetAbilityList(Rotation1, Rotation2, Rotation3);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

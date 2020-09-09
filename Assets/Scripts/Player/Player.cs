@@ -8,17 +8,20 @@ public class Player : MonoBehaviour
           normalMoveSpeed = 12.5f,
           rotationSpeedMouse = 240,
           focusRotationSpeedMouse = 100,
-          rotationSpeedController = 140,
+          maxRotationSpeedController = 350,
+          currentRotationSpeedController = 50,
           focusRotationSpeedController = 30,
           focusZoom = 30,
           focusMovementSpeed = 4.5f,
           shakeTimer = 0,
-          shakeSpeed = 0.03f,
+          shakeSpeed = 0.01f,
           shakePosition = 0;
     bool isFocussing = false,
          isRunning = false,
          isMoving = false,
-         shakeDown = true;
+         shakeDown = true,
+         rotateLeft = true,
+         lastRotLeft = true;
     [SerializeField] Camera cam;
     
     Rigidbody rigB;
@@ -51,12 +54,12 @@ public class Player : MonoBehaviour
         {
             movementSpeed = 20;
             isRunning = true;
-            shakeSpeed = 0.04f;
+            shakeSpeed = 0.01f;
         }
         else
         {
             isRunning = false;
-            shakeSpeed = 0.03f;
+            shakeSpeed = 0.005f;
         }
     }
 
@@ -76,10 +79,25 @@ public class Player : MonoBehaviour
             isMoving = false;
         }
 
+        if (lx > 0 || lx < 0)
+        {
+            if (lx > 0) { rotateLeft = false; }
+            if (lx < 0) { rotateLeft = true; }
+
+            if (lastRotLeft != rotateLeft) { currentRotationSpeedController = 50; }
+            if (lx < 0.1f && lx > 0) { currentRotationSpeedController = 50; }
+            if (lx > -0.1f && lx < 0) { currentRotationSpeedController = 50; }
+
+            if (currentRotationSpeedController < maxRotationSpeedController) { currentRotationSpeedController += 2f; }
+
+            lastRotLeft = rotateLeft;
+        }
+
+
         transform.Translate(mx, 0, my);
         if (Input.GetAxis("L2") == 0)
         {
-            cam.transform.Rotate(new Vector3(ly, lx, 0) * rotationSpeedController * Time.deltaTime);
+            cam.transform.Rotate(new Vector3(ly, lx, 0) * currentRotationSpeedController * Time.deltaTime);
             cam.fieldOfView = 60;
             movementSpeed = normalMoveSpeed;
             isFocussing = false;
@@ -93,10 +111,7 @@ public class Player : MonoBehaviour
             isFocussing = true;
         }
 
-        if (Input.GetAxis("Controller Button X") != 0 && Physics.Raycast(this.transform.position, Vector3.down * 1.5f, out RaycastHit hitInfo, 1.1f))
-        {
-            rigB.AddForce(new Vector3(0, 550, 0));
-        }
+        if (Input.GetAxis("Controller Button X") != 0 && Physics.Raycast(this.transform.position, Vector3.down * 2f, out RaycastHit hitInfo, 1.1f)) { rigB.AddForce(new Vector3(0, 550, 0)); }
 
         this.transform.eulerAngles = new Vector3(0, cam.transform.eulerAngles.y, 0);
         cam.transform.eulerAngles = new Vector3(cam.transform.eulerAngles.x, cam.transform.eulerAngles.y, 0);
@@ -144,11 +159,11 @@ public class Player : MonoBehaviour
     {
         if (!isFocussing)
         {
-            if (shakePosition > 0.2f)
+            if (shakePosition > 0.15f)
             {
                 shakeDown = true;
             }
-            else if (shakePosition < -0.2f)
+            else if (shakePosition < -0.15f)
             {
                 shakeDown = false;
             }

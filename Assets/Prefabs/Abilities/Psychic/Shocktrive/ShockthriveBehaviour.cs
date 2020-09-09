@@ -28,7 +28,7 @@ public class ShockthriveBehaviour : MonoBehaviour
                  {
                      if (EnteredInTrigger[i].tag == "Enemy")
                      {
-                         EnteredInTrigger[i].GetComponent<HealthSystem>().TakeDamage(damage);
+                         EnteredInTrigger[i].GetComponent<HealthSystem>().TakeDamage(damage, "Psychic");
                      }
                  }
              }

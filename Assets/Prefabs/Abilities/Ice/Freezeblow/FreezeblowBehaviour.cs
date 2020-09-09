@@ -21,7 +21,7 @@ public class FreezeblowBehaviour : MonoBehaviour
     {
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.gameObject.GetComponent<HealthSystem>().TakeDamage(damage);
+            collision.gameObject.GetComponent<HealthSystem>().TakeDamage(damage, "Ice");
             projectileSpeed = 0;
             Destroy(this.gameObject, 0.2f);
         }

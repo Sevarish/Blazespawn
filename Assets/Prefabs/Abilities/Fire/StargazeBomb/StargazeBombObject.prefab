@@ -61,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Explosion: {fileID: 1387375002017544801, guid: 5332a6fd53f325f41b5a17a7f5d28904,
     type: 3}
-  targetTeam: 
+  targetTeam: Blue
 --- !u!54 &1565966696992981947
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -85,10 +85,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8309566793203466363}
     m_Modifications:
-    - target: {fileID: 8329098624841601994, guid: 5a5723f3c95deb341a3045221ae3dea7,
+    - target: {fileID: 2512580866616867473, guid: 5a5723f3c95deb341a3045221ae3dea7,
         type: 3}
-      propertyPath: m_Name
-      value: ParticleEmitter
+      propertyPath: m_Materials.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5535546533477545042, guid: 5a5723f3c95deb341a3045221ae3dea7,
         type: 3}
@@ -144,6 +144,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8329098624841601994, guid: 5a5723f3c95deb341a3045221ae3dea7,
+        type: 3}
+      propertyPath: m_Name
+      value: ParticleEmitter
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a5723f3c95deb341a3045221ae3dea7, type: 3}

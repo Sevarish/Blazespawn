@@ -18,7 +18,6 @@ public class StargazeBombBehaviour : MonoBehaviour
         boxC = GetComponent<BoxCollider>();
         rigB = GetComponent<Rigidbody>();
         cam = GameObject.Find("Main Camera").GetComponent<Camera>();
-        boxC.size = new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     // Update is called once per frame
@@ -37,7 +36,7 @@ public class StargazeBombBehaviour : MonoBehaviour
                     {
                         if (EnteredInTrigger[i].tag == "Enemy")
                         {
-                            EnteredInTrigger[i].GetComponent<HealthSystem>().TakeDamage(damage);
+                            EnteredInTrigger[i].GetComponent<HealthSystem>().TakeDamage(damage, "Fire");
                         }
                     }
                 }
