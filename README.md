@@ -1,8 +1,3 @@
-# Blazespawn
-A project meant to become an RPG game like Skyrim, with elements from Borderlands and online MMORPGs (WoW, Guild Wars 2, etc)
-
-Update Log
-
 v0.0.1 - First Version (8 July 2020)
 - Maze Generation (Map)
 - One Player movement
@@ -26,3 +21,11 @@ Shockthive, Acidic Rush and Incinerate.
 - Tweaked healthbar appearance/dissapearance.
 - Placeholder interface/ability icons.
 - Full controller support.
+
+v0.0.4 - Tweaks and Temp Art (9 August 2020)
+- Added Basic Attack: Mind Artilery.
+- Added an enemy with walking animation.
+- Player now has hands.
+- Hands have two animations.
+- Changed Firestream to individual bursts.
+- Structured project files.
